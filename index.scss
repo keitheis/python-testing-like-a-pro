@@ -1,0 +1,121 @@
+// Variables Declaration
+$kred: #f43842;
+$kred-dim: #c96832;
+$kblue: #498cd6;
+$kblack: #121212;
+$kwhite: #f0f0f0;
+$kbgyellow: #fef573;
+
+$fgcolor: $kblack;
+$bgcolor: #FFF;
+$fgcolor-dim: #696969;
+
+$slidethemefg: $kred;
+$fs: 30px;
+
+@mixin inline-helpers {
+  // Colors
+  .kred { color: $kred }
+  .kblue { color: $kblue }
+  .kblack { color: $kblack }
+  .kwhite { color: $kwhite }
+  .slidethemefg { color: $slidethemefg }
+  // Aligns
+  .text-right { text-align: right }
+  .text-center { text-align: center }
+  .note {
+    color: $fgcolor-dim;
+    text-shadow: 1px 1px 1px #aaa;
+    a { color: $kred-dim }
+  }
+}
+
+@mixin headers {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: Ubuntu, Menlo, sans-serif;
+    text-shadow: 1px 1px 1px #aaa;
+    &.revertfg { color: $bgcolor }
+    &.focustitle {
+      color: $bgcolor;
+      text-shadow: 0 0 32px #000, 0 0 16px #000, 0 0 8px #000, 0 0 4px #000;
+    }
+    &.focustitle.red {
+      color: $kred;
+      text-shadow: { 0 0 32px #fff, 0 0 16px #fff, 0 0 8px #fff, 0 0 4px #fff,
+        0 0 32px #fff, 0 0 16px #fff, 0 0 8px #fff, 0 0 4px #fff,
+        0 0 64px #fff, 0 0 48px #fff, 0 0 32px #fff, 0 0 4px #FFF
+      }
+    }
+  }
+}
+
+// Style
+#body {
+  background: $bgcolor;
+  color: $kblack;
+}
+@include headers;
+@include inline-helpers;
+
+.name { font-family: Trebuchet MS, Lucida Grande, Lucida Sans, Tahoma, sans-serif }
+
+.slide#front {
+  padding: 2em;
+  padding-top: 1.6em;
+}
+.slide,.slide.active {
+  padding-left: 4.5em;
+  background: $bgcolor;
+  color: $fgcolor;
+  &.loading { background: $bgcolor; }
+
+  // Headers
+  h2 { color: $slidethemefg }
+  @include headers;
+
+  h2.shout { 
+    font-weight: bold;
+    color: $bgcolor;
+  }
+
+  // Font-size
+  p,li { font-size: $fs}
+  .fs-xl { font-size: 180%; }
+  .fs-l { font-size: 160%; }
+  .fs-s { font-size: 80%; }
+  .fs-xs {
+    font-size: 60%;
+    ul li { font-size: 60%; }
+  }
+  &.outlines h3 { font-size: 38px; }
+
+  // Inline helpers
+  @include inline-helpers;
+
+  // A Href
+  a { background: none; }
+  font-size: $fs;
+  i.fa {
+    font-style: normal;
+    text-indent: 0;
+  }
+  mark { background-color: $kbgyellow }
+
+  // Code
+  pre .codehilite {
+    color: $bgcolor;
+    font-size: 28px;
+    line-height: 1.2;
+    padding: .1em .3em;
+    background: #323232;
+  }
+
+  &.fullcode { 
+    h2 { margin-top: -36px; margin-bottom: 40px; }
+    pre { margin-top: -36px; }
+    &.max h2 { margin-top: -60px; margin-bottom: 64px; }
+    &.max pre { margin-top: -54px;
+      .codehilite {font-size: 26px}
+    }
+  }
+}

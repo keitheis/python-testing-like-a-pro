@@ -1,0 +1,171 @@
+From dad9f5fa8c5ab7e6f5bb3a5b539705d1fe9cf9fc Mon Sep 17 00:00:00 2001
+From: Keith Yang <yang@keitheis.org>
+Date: Thu, 10 Aug 2017 23:08:23 +0800
+Subject: [PATCH] Change for PyCon Taiwan 2017
+
+---
+ index.html                       |  2 +-
+ styles/_defaults.scss            |  2 +-
+ styles/_fonts.scss               | 30 ++++++++++++------------------
+ styles/shower/shower.scss        |  2 +-
+ styles/slide/content/basic.scss  |  2 +-
+ styles/slide/content/code.scss   |  2 +-
+ styles/slide/content/inline.scss |  2 +-
+ styles/slide/content/quote.scss  |  2 +-
+ 8 files changed, 19 insertions(+), 25 deletions(-)
+
+diff --git a/index.html b/index.html
+index 96d3b04..1fee058 100644
+--- a/index.html
++++ b/index.html
+@@ -5,7 +5,7 @@
+ 	<meta charset="utf-8">
+ 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+-	<link rel="stylesheet" href="styles/screen-16x10.css">
++	<link rel="stylesheet" href="styles/screen-16x9.css">
+ </head>
+ <body class="shower list">
+ 	<header class="caption">
+diff --git a/styles/_defaults.scss b/styles/_defaults.scss
+index ec25586..2f736e3 100644
+--- a/styles/_defaults.scss
++++ b/styles/_defaults.scss
+@@ -23,7 +23,7 @@ $gap:96px;
+ 
+ // Colors
+ 
+-$color:#4CAF50;
++$color:#d43842;
+ 
+ $black:mix(black, white, 87%);
+ $dark:mix(black, white, 54%);
+diff --git a/styles/_fonts.scss b/styles/_fonts.scss
+index 248d3ef..645e21e 100644
+--- a/styles/_fonts.scss
++++ b/styles/_fonts.scss
+@@ -1,44 +1,38 @@
+ // ------------------------------------------------------------------
+ // Fonts
+ // ------------------------------------------------------------------
+-// 1. Roboto ........... Text font
+-// 2. Roboto Light ..... Headings font
+-// 3. Roboto Mono ...... Code font
++// 1. Ubuntu ........... Text font
++// 2. Ubuntu Light ..... Headings font
++// 3. Ubuntu Mono ...... Code font
+ // ------------------------------------------------------------------
+ 
+-// Roboto
++// Ubuntu
+ 
+ @font-face {
+-	font-family:Roboto;
+-	src:url(../fonts/roboto-regular.woff) format('woff');
++	font-family: -apple-system, Ubuntu, Segoe UI;
+ 	}
+ @font-face {
+ 	font-weight:bold;
+-	font-family:Roboto;
+-	src:url(../fonts/roboto-bold.woff) format('woff');
++	font-family: -apple-system, Ubuntu, Segoe UI;
+ 	}
+ @font-face {
+ 	font-style:italic;
+-	font-family:Roboto;
+-	src:url(../fonts/roboto-italic.woff) format('woff');
++	font-family: -apple-system, Ubuntu, Segoe UI;
+ 	}
+ @font-face {
+ 	font-style:italic;
+ 	font-weight:bold;
+-	font-family:Roboto;
+-	src:url(../fonts/roboto-bold-italic.woff) format('woff');
++	font-family: -apple-system, Ubuntu, Segoe UI;
+ 	}
+ 
+-// Roboto Light
++// Ubuntu Light
+ 
+ @font-face {
+-	font-family:Roboto Light;
+-	src:url(../fonts/roboto-light.woff) format('woff');
++	font-family: -apple-system, Ubuntu Light, Segoe UI;
+ 	}
+ 
+-// Roboto Mono
++// Ubuntu Mono
+ 
+ @font-face {
+-	font-family:Roboto Mono;
+-	src:url(../fonts/roboto-mono-regular.woff) format('woff');
++	font-family: -apple-system, Ubuntu Mono, Segoe UI;
+ 	}
+diff --git a/styles/shower/shower.scss b/styles/shower/shower.scss
+index 898db3c..9089158 100644
+--- a/styles/shower/shower.scss
++++ b/styles/shower/shower.scss
+@@ -7,7 +7,7 @@
+ 	color:$black;
+ 	counter-reset:slide;
+ 	line-height:1;
+-	font-family:Roboto, sans-serif;
++	font-family: -apple-system, Ubuntu, Segoe UI, sans-serif;
+ 
+ 	-webkit-print-color-adjust:exact;
+ 	-webkit-text-size-adjust:none;
+diff --git a/styles/slide/content/basic.scss b/styles/slide/content/basic.scss
+index a5c1348..bec53d3 100644
+--- a/styles/slide/content/basic.scss
++++ b/styles/slide/content/basic.scss
+@@ -5,7 +5,7 @@
+ h2 {
+ 	margin-bottom:32px;
+ 	color:$black;
+-	font:48px/1 Roboto Light, sans-serif;
++	font:48px/1 -apple-system, Ubuntu Light, sans-serif;
+ 	}
+ p {
+ 	margin-bottom:1em;
+diff --git a/styles/slide/content/code.scss b/styles/slide/content/code.scss
+index 620cd91..58c13da 100644
+--- a/styles/slide/content/code.scss
++++ b/styles/slide/content/code.scss
+@@ -25,7 +25,7 @@ pre {
+ 		display:block;
+ 		margin-left:-96px;
+ 		padding:0 0 0 96px;
+-		width:calc(100% + 96px + 112px);
++		// width:calc(100% + 96px + 112px);
+ 		background:none;
+ 		line-height:2;
+ 		white-space:pre;
+diff --git a/styles/slide/content/inline.scss b/styles/slide/content/inline.scss
+index 0abe77d..d02175e 100644
+--- a/styles/slide/content/inline.scss
++++ b/styles/slide/content/inline.scss
+@@ -18,7 +18,7 @@ code, kbd, mark, samp {
+ 	}
+ code, kbd, samp {
+ 	line-height:1;
+-	font-family:Roboto Mono, monospace, monospace;
++	font-family:Ubuntu Mono, monospace;
+ 	}
+ sub, sup {
+ 	position: relative;
+diff --git a/styles/slide/content/quote.scss b/styles/slide/content/quote.scss
+index bffc4ca..026a377 100644
+--- a/styles/slide/content/quote.scss
++++ b/styles/slide/content/quote.scss
+@@ -8,7 +8,7 @@ blockquote {
+ 
+ 	&::before {
+ 		position:absolute;
+-		margin:-0.04em 0 0 -0.4em;
++		margin:-0.1em 0 0 -0.45em;
+ 		color:$light;
+ 		line-height:1;
+ 		font-style:normal;
+-- 
+2.14.0
+

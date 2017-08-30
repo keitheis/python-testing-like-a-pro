@@ -1,0 +1,38 @@
+// ------------------------------------------------------------------
+// Fonts
+// ------------------------------------------------------------------
+// 1. Ubuntu ........... Text font
+// 2. Ubuntu Light ..... Headings font
+// 3. FiraCode Mono ...... Code font
+// ------------------------------------------------------------------
+
+// Ubuntu
+
+@font-face {
+	font-family: -apple-system, Ubuntu, Segoe UI;
+	}
+@font-face {
+	font-weight:bold;
+	font-family: -apple-system, Ubuntu, Segoe UI;
+	}
+@font-face {
+	font-style:italic;
+	font-family: -apple-system, Ubuntu, Segoe UI;
+	}
+@font-face {
+	font-style:italic;
+	font-weight:bold;
+	font-family: -apple-system, Ubuntu, Segoe UI;
+	}
+
+// Ubuntu Light
+
+@font-face {
+	font-family: -apple-system, Ubuntu Light, Segoe UI;
+	}
+
+// FiraCode Mono
+
+@font-face {
+	font-family: Ubuntu Mono, Segoe UI;
+	}
