@@ -1,33 +1,647 @@
+-inherit file="base.plim"
 -namespace module="plimsolls.formatters.code2html" name="code2html"
 
 -py
-  subject = "Python Testing Like a Pro"
+  subject = "Python Testing like a Pro"
 
-doctype 5
-html lang="en"
-  head
-    title ${subject} -- Keith Yang
-    meta charset="utf-8"
-    meta http-equiv="x-ua-compatible" content="ie=edge"
-    meta name="viewport" content="width=device-width, initial-scale=1"
-    link rel="stylesheet" href="shower/material/styles/screen-16x10.css"
-    link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"
-    link rel="stylesheet" href="pygments.css"
-    link rel="stylesheet" href="index.css"
 
-  body.shower.list
+header.caption
+  h1 = subject
+  h2 Coding test-driven Python package
+    br with CI and Cloud
+  h2.name.revertfg Keith Yang
+  br
+  h3.note.text-right 2017 August
 
-    -include content.html
+section#front.slide.loading.text-center
+  h2.focustitle ${subject} 🚀
+  h3.subject.focustitle Keith Yang
 
-    .progress
+  img.cover src="pictures/formosat-5-launch.jpg" alt="" width="100%"
+  -for looping in range(5)
+    br
+  div.note.text-center Formosat-5 launching
 
-    <!-- Copyright © 2017 Keith Yang -->
-    script src="shower/shower.min.js"
-    script
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+section.slide
+  h2 Coding test-driven Python package with CI and cloud `i.fa.fa-cloud`
+  h3.text-center My talk in PyCon APAC 2017
+  br
+  h4.text-center
+    a(href="mailto:yang@keitheis.org") yang@keitheis.org
+  h4.text-center @keitheis
+    ,
+    a href="https://twitter.com/keitheis": i.fa.fa-twitter
+    ,
+    a href="https://github.com/keitheis": i.fa.fa-github
 
-      ga('create', 'UA-4248558-11', 'auto');
-      ga('send', 'pageview');
+section.slide
+  h2 alog v.s. OpenStack
+  Difference?
+  -py
+    code = """
+      keithis/alog <master>
+      % find . -name '*.py' | xargs cat | wc -l
+      418
+    """
+  pre: code.next == code2html.reformat('bash', code)
+  h3.next Total 418 Python lines of code in `code alog`
+
+section.slide
+  h2 Versus Over 20,000,000 Lines
+    br of Code of
+  img src="pictures/openstack.png" alt="OpenStack" width="100%"
+
+section.slide
+  h2 The same part: `mark BUG FREE`!
+    span.next
+      | ?
+      img src="pictures/bugspread.png" alt="" width="100%"
+
+section.slide
+  img.cover(src="pictures/echostarxxiiilaunch.jpg"
+      alt="Another Launching Image" width="100%")
+
+section.slide.text-center
+  h2 Keith Yang
+  h3 Software Engineering Artisan
+  h4 Caring from code, tesitng, to delivery on Web & Cloud
+  img.avatar src="pictures/keith-avatar.png" alt="Keith's avatar"
+  h4.note
+    Founder of `a href='http://taipei.python.org.tw/' @Taipeipy` since 2012
+    br
+    Chairpersion of `a href='https://tw.pycon.org/2015apac/' PyCon APAC 2015`
+    br
+    Cloud Senior Engineer in `a href='https://www.ichefpos.com/' iCHEF`
+
+  -scss
+    img.avatar {
+      margin: 0.6em;
+      width: 64px;
+      border-style: none;
+      border-radius: 3px;
+      box-sizing: border-box;
+      display: inline-block;
+      overflow: hidden;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+section.slide
+    h2 Abstract
+    ul
+      li `mark Perspectives` and `mark categories` of software testing
+      li Abstract `mark workflow` and `mark concepts`
+      li Pragmatic `mark tools` and some `mark tips`
+
+section.slide
+  -md
+    ## Expected Experience 
+    - Tested app and/or code
+    - Unit Testing
+    - Continuous Integration (CI)
+    - Plus: heard of 
+      - Test-driven Development (TDD)
+      - Continuous Delivery (CD)
+
+section.slide
+  h2 For participating a serious project
+  div.text-center
+    a href="https://wiki.openstack.org/wiki/Testing"
+      | https://wiki.openstack.org/wiki/Testing
+  img(src="pictures/openstack_testing.png"
+      alt="Testing in OpenStack" width="80%")
+  
+section.slide
+  h2 Testing in an OpenStack project 
+  ul
+    li Unit Tests
+    li Style Checks
+    li Integration Tests
+    li Product Tests
+
+section.slide
+  h2.shout Perspectives 
+    br 
+    | & Categories
+
+section.slide
+  h2.note `i.fa.fa-info-circle` Note
+  p.note
+    | Some terms `mark marked` in the following slides \
+      for easier remember while going through slides.
+
+section.slide
+  h2 Software Application Categories
+  table.fs-s
+    tr 
+      td Accounting
+      td Airline
+      td Banking
+      td Commerce
+    tr
+      td Compiler
+      td Protocols
+      td Cryptography
+      td Embedded system
+    tr
+      td Finance
+      td Games
+      td Manufacturing
+      td Music
+    tr
+      td Science
+      td Training
+      td Voting
+      td Web browser
+    tr
+      td Router
+      td `mark Cloud architecture`
+      td OS
+      td Robotic
+    tr 
+      td(colspan=4) Image, speech, or handwriting processing
+
+
+section.slide
+  h2.next by Human?
+  img.cover src="pictures/titanic-2003.jpg" alt="Titanic 2003"
+
+section.slide
+  h2 Software Testing Topic
+  ul
+    li `mark Scope` 🗺 
+    li Functional vs non-functional testing
+    li Defects and failures
+    li Static vs dynamic testing
+    li Software testing ream
+
+section.slide
+  h2 Testing Methods
+  Box approach
+  ul
+    li `i.fa.fa-square-o` White box 
+    li `i.fa.fa-square` Black box
+    li `i.fa.fa-plus-square` `mark Grey box testing`
+
+section.slide
+  h2 `i.fa.fa-level-up` Testing levels `i.fa.fa-level-down` 
+  ul
+    li Unit testing
+    li `mark Integration testing`
+    li System testing
+    li System integration testing
+    li Regression testing
+    li Alpha and Beta testing
+
+section.slide
+  h2 Non-functional testing
+  ul
+    li Performance and load testing
+    li Stability testing
+    li Usability testing
+    li `mark Security testing`
+    li Internationalization and localization
+    li Destructive testing
+
+section.slide
+  h2 Testing Process
+  ul
+    li Traditional CMMI or waterfall development model
+    li `mark Agile` or Extreme development model
+    li A sample testing cycle
+
+section.slide
+  h2.shout No enough experience? 
+    br 
+      span.fs-xs No`span.kblack.next t really a blocking` problem!
+
+section.slide
+  h2.shout Learn from
+    br Open Source!
+
+section.slide
+  h2 `i.fa.fa-github` keitheis/alog
+  a.note.fs-xs href="https://github.com/keitheis/alog"
+    | https://github.com/keitheis/alog
+  img.next(src="pictures/alog-coverage.png"
+      alt="coverage and pypi version badges of alog" width="80%")
+
+section.slide
+  h2.shout build | passing
+
+section.slide
+  h2 Builds on Travis CI
+  img(src="pictures/alog-on-travisci.png"
+      alt="Build results of alog on Travis CI" width="100%")
+
+section.slide
+  h2 Concept `i.fa.fa-envelope` Confirm Action Success
+  h3 Use Email, IM notification
+  img(src="pictures/travisci-email-alog-ok.png"
+      alt="Build results of alog on Travis CI" width="100%")
+
+section.slide
+  h2 Concept `i.fa.fa-bell` Alert on Broken
+  h3 Use Email, SMS notification
+  img(src="pictures/alog-on-travisci-broken.png"
+      alt="Build results of alog on Travis CI" width="100%")
+  p.note.next.text-center
+    NO, it's me! Ask me to fix it!
+
+section.slide
+  h2.shout codecov | 100%
+
+section.slide
+  h2 Coverages Report on Codecov
+  img(src="pictures/codecov-report-alog.png"
+      alt="Coverage report of alog on Codecov" width="70%")
+
+section.slide
+  h2 Files coverage of alog on Codecov
+  img(src="pictures/coverages-of-alog-files.png"
+      alt="Coverage of alog files on Codecov" width="100%")
+  p.note.next.text-center
+    It looks 100% good.
+
+section.slide
+  h2 Lines coverage of alog module
+  img(src="pictures/lines-coverage-of-alog.png"
+      alt="Coverage lines of an alog module" width="100%")
+
+section.slide
+  h2 Coverage 💯 %?
+  ul
+    li Some lines marked ignored from coverage
+    li Not integration tests
+  ul.next
+    li Totally `b NOT` bug free
+    li Most lines were `b executed`
+
+section.slide
+  h2.shout pypi | v0.9.13
+
+section.slide
+  h2 Package ready on (new) PyPI
+  img(src="pictures/alog-package-on-pypi.png"
+      alt="Alog package page on PyPI" width="100%")
+
+section.slide
+  h2.shout How? Tox!
+
+section.slide
+  h2 `i.fa.fa-github` tox-dev/tox
+  blockquote
+    | virtualenv management and test command line tool 
+  -py
+    code = """
+      # content of: tox.ini , put in same dir as setup.py
+      [tox]
+      envlist = py26,py27
+      [testenv]
+      deps=pytest       # install pytest in the venvs
+      commands=pytest  # or 'nosetests' or ...
+    """
+  pre: code.next == code2html.reformat('text', code)
+
+section.slide
+  h2 `i.fa.fa-github` tox-dev/tox
+  blockquote
+    | virtualenv management and test command line tool 
+  ul
+    li Environment list
+    li Dependences
+    li Commands
+
+section.slide.fullcode
+  h2 tox.ini of alog
+  -py
+    code = """
+      [tox]
+      envlist =
+          py27,py33,py34,py35,py36,pypy,
+          {py2,py3}-cover,coverage
+      
+      [testenv]
+      basepython =
+          py27: python2.7
+          ...
+          py36: python3.6
+          pypy: pypy
+          py2: python2.7
+          py3: python3.4
+    """
+  pre: code == code2html.reformat('text', code)
+
+section.slide
+  h2 Services Automation by GitHub
+  ul
+    li Webhooks
+      ul: li: Codecov
+    li Integrations & services
+      ul: li: Travis CI
+    li.next
+      There are alternatives!
+
+section.slide.fullcode
+  h2 .travis.yml of alog
+  -py
+    code = """
+    ...
+    install:
+      - travis_retry pip install tox
+
+    script:
+      - travis_retry tox
+
+    after_success:
+      - bash <(curl -s https://codecov.io/bash)
+
+    notifications:
+      email:
+        - yang@keitheis.org
+    """
+  pre: code == code2html.reformat('text', code)
+
+section.slide.fullcode
+  h2 .travis.yml of alog
+  ul
+    li Install Tox
+    li Test script `code.next tox`
+    li Run command after success
+    li Notifications
+
+section.slide.fullcode
+  h2 Tips of using Travis CI
+  ul
+    li Use Tox for diff envs
+    li `code travis_retry`
+      ul.next
+        li Network timeout
+        li Or unknown reasons
+        li See `i Common Build Problems` on its website
+    li Email notification
+
+section.slide
+  h2.shout Hooray!
+    br Focus on Coding!
+
+section.slide
+  h2.shout Wait...
+    br how about Jenkins?
+
+section.slide
+  h2 Fun Facts of Jenkins
+  ul
+    li Originally developed as the `mark Hudson` project.
+    li Started in summer of `mark 2004` at `mark Sun` Microsystems.
+    li First released in `mark java.net` in Feb. 2005.
+  br
+  p.note.fs-s
+    | https://en.wikipedia.org/wiki/Jenkins_(software)
+
+section.slide
+  h2 Swift builds on Jenkins
+  img(src="pictures/jenkins-swift-project.png"
+      alt="Customzied Jenkins page of Swift" width="100%")
+
+section.slide
+  h2 Code Coverage and Test Trend
+    br on Jenkins
+  img(src="pictures/code-coverage-test-trend-jenkins.png" alt=""
+      width="50%")
+  img(src="pictures/jenkins.png" alt="" width="50%")
+
+section.slide
+  h2 Tips of Coverage on Jenkins
+  ul
+    li Fail the build if coverage obviously dropped
+    li 
+      | Use Docker (if suitable to the software) \
+        for testing multiple `mark pull-requests` testing parallelly
+    li Let Jenkins do the deployment to share the knowhow
+    li Fully CI/CD autumation isn't far far away
+
+section.slide
+  h2 Avoid keeping failing or
+  div.text-center
+    img(src="pictures/fire-jenkins.svg" alt="Fire Jenkins" width="50%")
+
+section.slide
+  h2.shout What it is all for
+
+section.slide
+  h2 `i Keep failures before release`
+  h3.next It's really hard.
+    br After release:
+
+section.slide.text-center
+  h2.kblack Even AWS Serveless Can Fail
+  div
+    img(src="pictures/aws-serverless-errors.png"
+        alt="AWS Serveless Errors" width="100%")
+
+section.slide.text-center
+  h2.kblack My HeardBleed with OpenSSL
+  div
+    img(src="pictures/heartbleed-page.png"
+        alt="Heardbleed Page" width="124%")
+
+section.slide.text-center
+  h2.kblack.next A `span.fs-s Little` Less Surprise?
+  div
+    img(src="pictures/less-surprise-yahoo.png"
+        alt="Yahoo Error Page" width="80%")
+
+section.slide
+  h2.shout: i Forget it, 
+    br lets go back to CODE!
+
+section.slide
+  h2.shout Don't forget it 
+    br please 🙇
+
+section.slide
+  h2 Back to Python World `span.next Finally!`
+  p
+    mark 2 strategies
+    | will be focus here
+
+section.slide
+  h2 Strategy 1. Show Me Errors Early
+  Some tools
+  ul
+    li IPython
+    li Code Linter on IDE/Editors/CI
+    li yapf
+    li py.test
+    li hyposesis
+
+section.slide
+  h2 IPython (& Jupyter Notebook)
+  ul
+    li Evaluate behaviors step by step
+    li Explore current environment and variables
+    li Consider use pdb for exceptions
+
+section.slide
+  h2 Step by Step Extension
+  h3 Tip: Install IPython first
+  ul
+    li Pyramid `code pshell --development.ini`
+    li `code pyramid_debugtoolbar` & `code pyramid_ipython`
+    li Django Debug Toolbar
+    li Django `code python manage.py shell`
+
+section.slide
+  h2 Code Linter on IDE/Editors/CI
+  h3 Super helpful for human typo
+  ul
+    li Vim: syntastic, ale (with `code flake8`)
+    li Sublime Text Linter
+    li Most IDEs: built-in
+
+section.slide
+  h2 Concept: WYSWYG
+  h3 What you see is what you get
+  h3.next See it right right away!
+    img(src="pictures/demo_storybook.gif"
+        alt="React Storybook" width="130%")
+
+section.slide
+  h2 `i.fa.fa-github` google/yapf
+  blockquote 
+    | ... based off of 'clang-format' ... \
+      In essence, the algorithm takes the code and reformats it \
+      to the best formatting that conforms to the style guide, ...
+  blockquote 
+    | even if the original code `b didn't violate` the style guide. 
+  h3.text-right.next
+    img src="pictures/questions.png" alt="???" width="50%"
+
+section.slide
+  h2 Tips of using `code yapf`
+  ul
+    li
+      | Can be used to format thoudsands of legacy Python code \
+        that is hard to read by our `i PEP8` built-in eyes.
+    li Many options including Google and Facebook style to taste
+    blockquote.next.fs-s
+      | YAPF is not an official Google product (experimental or otherwise), \
+        it is just code that happens to be owned by Google. 
+
+section.slide
+  h2.shout py.test
+
+section.slide
+  h2 py.test
+  blockquote
+    | makes it easy to write `mark small` tests, \
+      yet `mark scales` to support `mark complex` functional testing \
+      for applications and libraries.
+
+section.slide
+  h2 Tips of using `code py.test`
+  ul
+    li Use it even `code Python` and `code Django` built-in unittest
+    li Super handy to test a single module
+      br by `code pytest app/tests/test_a_single.py`
+    li with `code pytest-cov` and `code --junitxml` for Jenkins
+    li with `code --lf` to just test last failures
+
+section.slide
+  h2 hyposesis
+  blockquote
+    | ... lets you write tests which are parametrized by a source of examples, and then generates simple and comprehensible examples that make your tests fail.
+
+section.slide
+  h2 hyposesis
+  -py
+    code = """
+      @given(st.lists(
+        st.floats(allow_nan=False,
+          allow_infinity=False), min_size=1))
+      def test_mean(xs):
+          assert min(xs) <= mean(xs) <= max(xs)
+
+      Falsifying example: test_mean(
+        xs=[1.7976321856e+308, 6.102322755e+303]
+      )
+    """
+  pre: code == code2html.reformat('python', code)
+
+section.slide
+  h2 Many to discover
+  ul
+    li `code freezegun` - Fix tesing `code utc.now`!
+    li `code Faker` - generate useful fake values
+    li `code vcrpy` - recording API results
+    li `code pip-tools` - separate testing requirements
+    li ...
+
+section.slide
+  h2.shout unittest.mock
+
+section.slide
+  h2 Tips of `code mock`
+  ul
+    li Python 3 built-in
+    li `code pip install mock`
+    li Let you focus on current pargs while fighting messy legacy code
+  blockquote Assert it works before and mock it with success result
+
+section.slide
+  h2 Strategy 2. Let Me Debug Easily
+  ul
+    li Sentry - logging runtime erros
+    li IPython - have it on production
+    li alog - have it on production
+      br `span.next and benefit from it during development and testing`
+
+section.slide
+  h2 Tips of Sentry
+  ul
+    li Separate different environments on Sentry by Sentry project - `b much eaiser` to see urgent errors and debug
+    li Can be great to have while working on legacy
+      br 👉 Integrate it during development
+
+section.slide
+  h2.shout Because
+    br Things Happen
+
+section.slide
+  h2 Prepare most error handles during development
+  p 
+    | You can invest the minimal time cost for maximum gain \
+      by paying attention during development
+  img src="pictures/payfirst.png" alt="Pay something before release" width="80%"
+
+section.slide
+  img.cover src="pictures/jrti.png" alt="Just Read the Instructions" width="100%"
+
+section.slide
+  h2 Some References
+  ul
+    li: i Test-Driven Python Development
+    li: i Test-Driven Development with Python, 2nd Edition
+    li: i Code Complete (2nd edition)
+    li `i Building for Failure: Learning lessons from aviation` by @andrewgodwin
+
+section.slide
+  h2 Summary
+  ul
+    li Prepare your testing strategies
+    li With best tools to help the workflow
+    li Let errors be found as early as possible
+    li Prepare runtime failures
+
+section.slide
+  h2.shout No tested backup plan?
+    br equals no backup
+
+section.slide
+  h2.shout Q&A 
+    br: span.next Enjoy
+
+section.slide
+  h2.shout Thank you!
+    br: span.kblack.next Things Happen

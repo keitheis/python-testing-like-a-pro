@@ -1,8 +1,5 @@
 # Default make to test only.
-all: compile-css compile-content compile-index
-
-compile-content:
-	plimc -H -o content.html content.plim
+all: compile-css compile-index
 
 compile-index:
 	plimc -H -o index.html index.plim
